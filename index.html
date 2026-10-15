@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michael Etete | Graphic, Motion &amp; Video Designer, Lagos</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: About with a photo ring first; then three pinned segments (sport, brand, events) where scrolling down pans each poster strip left to right; contact last. */
+:root {
+  --ink: #0d0f0e;
+  --ink-2: #171a18;
+  --paper: #e6e9e4;
+  --paper-2: #d6dad3;
+  --plum: #160a1d;
+  --text-d: #eef1ea;
+  --muted-d: #98a199;
+  --text-l: #0f1211;
+  --muted-l: #4f5951;
+  --line-d: rgba(238, 241, 234, 0.18);
+  --line-l: rgba(15, 18, 17, 0.22);
+  --signal: #2bd461;
+  --signal-deep: #0c7a35;
+  --f-display: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
+  --f-body: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --nav-h: 56px;
+  --th: max(300px, min(calc(100svh - var(--nav-h) - 210px), calc(125vw - 70px)));
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text-d);
+  font-family: var(--f-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+h1, h2, h3, p { margin: 0; }
+h1, h2 { text-wrap: balance; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+
+.wrap {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.label {
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+
+/* Background: looping chrome sphere replaces the black behind About + Sport only */
+.bg-sphere { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; display: grid; place-items: center; }
+.bg-sphere video {
+  /* Black in the video disappears into the page black (screen blend); size follows the screen so it fits phones, tablets and desktops */
+  width: clamp(560px, 135vmin, 1600px); height: auto; aspect-ratio: 696 / 648;
+  max-width: none; flex: none; object-fit: cover; display: block;
+  mix-blend-mode: screen; opacity: 0.6;
+  -webkit-mask-image: radial-gradient(closest-side, #000 80%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 80%, transparent 100%);
+  pointer-events: none;
+}
+@media (orientation: portrait) { .bg-sphere video { width: clamp(560px, 150vw, 1200px); } }
+.hs--sport { background: transparent; }
+
+/* Header */
+.site-head {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: rgba(13, 15, 14, 0.94);
+  border-bottom: 1px solid var(--line-d);
+}
+.site-head .wrap {
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brandmark {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav { display: flex; gap: 18px; }
+.nav a { text-decoration: none; color: var(--muted-d); }
+.nav a:hover { color: var(--text-d); }
+
+/* About */
+.about { padding-block: clamp(40px, 7vw, 96px) clamp(56px, 8vw, 112px); }
+.about .wrap { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+.about-copy { min-width: 0; display: flex; flex-direction: column; gap: 24px; max-width: 640px; }
+.about h1 {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(3.2rem, 11vw, 7.5rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+.about h1 .accent { color: var(--signal); }
+.about-role {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  max-width: 24ch;
+}
+.about-lede { font-size: 1.1875rem; max-width: 52ch; color: var(--muted-d); text-transform: uppercase; letter-spacing: 0.04em; }
+.about-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-d); }
+.about-list li { padding: 14px 0; border-bottom: 1px solid var(--line-d); display: flex; justify-content: space-between; gap: 4px 16px; flex-wrap: wrap; }
+.about-list span:last-child { color: var(--muted-d); }
+.about-go { color: var(--muted-d); }
+.about-go a { color: var(--text-d); }
+
+.ring { position: relative; width: min(100%, 440px); aspect-ratio: 1; margin-inline: auto; }
+.ring-text { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 48s linear infinite; }
+.ring-text text { font-family: var(--f-mono); font-size: 22px; fill: var(--text-d); text-transform: uppercase; }
+.ring-orbit { position: absolute; inset: 15%; border-radius: 50%; border: 1px dashed var(--line-d); animation: spin 30s linear infinite reverse; }
+.ring-orbit::after { content: ""; position: absolute; top: -6px; left: 50%; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--signal); }
+.photo { position: absolute; inset: 21%; border-radius: 50%; overflow: hidden; background: var(--ink-2); border: 2px solid var(--signal); display: grid; place-items: center; text-align: center; }
+.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.photo span { color: var(--muted-d); padding: 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+/* About motion */
+.about h1 .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.04em 0.06em 0.1em; margin: -0.04em -0.06em -0.1em; }
+.about h1 .w i {
+  display: inline-block; font-style: normal;
+  animation: wordUp 1s cubic-bezier(0.2, 0.85, 0.2, 1) backwards;
+  animation-delay: calc(0.2s + var(--i) * 0.14s);
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .about h1 .accent .w i {
+    background: linear-gradient(100deg, var(--signal) 0%, var(--signal) 42%, #c9ffdb 50%, var(--signal) 58%, var(--signal) 100%) 100% 0 / 250% 100% no-repeat;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: wordUp 1s cubic-bezier(0.2, 0.85, 0.2, 1) backwards, sheen 3.4s ease-in-out 1.6s infinite;
+    animation-delay: calc(0.2s + var(--i) * 0.14s), calc(1.6s + var(--i) * 0.18s);
+  }
+}
+.about-copy > :not(h1) { animation: fadeUp 0.9s cubic-bezier(0.2, 0.85, 0.2, 1) backwards; }
+.about-copy > :nth-child(1) { animation-delay: 0.05s; }
+.about-copy > :nth-child(3) { animation-delay: 0.85s; }
+.about-copy > :nth-child(4) { animation-delay: 1.0s; }
+.about-copy > :nth-child(5) { animation-delay: 1.15s; }
+.ring { animation: ringIn 1.1s cubic-bezier(0.2, 0.85, 0.2, 1) 0.2s backwards, drift 8s ease-in-out 1.4s infinite; }
+.photo { animation: photoIn 1.5s cubic-bezier(0.2, 0.85, 0.2, 1) 0.35s backwards; }
+.photo img {
+  transform: scale(1.1);
+  translate: var(--tx, 0px) var(--ty, 0px);
+  transition: translate 0.6s cubic-bezier(0.2, 0.85, 0.2, 1);
+  animation: photoZoom 2s cubic-bezier(0.2, 0.85, 0.2, 1) 0.35s backwards;
+}
+.ring-orbit { animation: spin 30s linear infinite reverse, fadeIn 1.2s ease 0.9s backwards; }
+@keyframes wordUp { from { transform: translateY(115%) rotate(5deg); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes sheen { 0% { background-position: 100% 0; } 55%, 100% { background-position: 0% 0; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ringIn { from { opacity: 0; transform: scale(0.82) rotate(-12deg); } to { opacity: 1; transform: none; } }
+@keyframes photoIn { from { clip-path: circle(0% at 50% 50%); transform: scale(0.7); } to { clip-path: circle(75% at 50% 50%); transform: none; } }
+@keyframes photoZoom { from { transform: scale(1.5); } to { transform: scale(1.1); } }
+@keyframes drift { 0%, 100% { transform: none; } 50% { transform: translateY(-9px); } }
+
+@media (min-width: 900px) { .about .wrap { grid-template-columns: 1.25fr 1fr; gap: 72px; } }
+/* Mobile only: photo sits right under the "Hi, I'm Michael Etete." heading */
+@media (max-width: 899px) {
+  .about .wrap { gap: 24px; }
+  .about-copy { display: contents; }
+  .about-copy > .label { order: 1; }
+  .about-copy > h1 { order: 2; }
+  .ring { order: 3; margin-block: 8px; }
+  .about-copy > .about-role { order: 4; }
+  .about-copy > .about-lede { order: 5; }
+  .about-copy > .about-go { order: 6; }
+}
+
+/* Pinned segments */
+.hs { position: relative; }
+.hs--sport { background: var(--ink); --seg-accent: var(--signal); --seg-text: var(--text-d); --seg-muted: var(--muted-d); --seg-line: var(--line-d); --seg-tile: var(--ink-2); }
+.hs--brand { background: var(--paper); --seg-accent: var(--signal-deep); --seg-text: var(--text-l); --seg-muted: var(--muted-l); --seg-line: var(--line-l); --seg-tile: var(--paper-2); }
+.hs--events { background: var(--plum); --seg-accent: var(--signal); --seg-text: var(--text-d); --seg-muted: #a899b3; --seg-line: rgba(238, 241, 234, 0.2); --seg-tile: #25122f; }
+.hs--social { background: #ece6da; --seg-accent: var(--signal-deep); --seg-text: var(--text-l); --seg-muted: var(--muted-l); --seg-line: var(--line-l); --seg-tile: #ddd6c7; }
+.hs--church { background: #0b1230; --seg-accent: var(--signal); --seg-text: var(--text-d); --seg-muted: #9aa3c2; --seg-line: rgba(238, 241, 234, 0.2); --seg-tile: #141c43; }
+.hs--social :focus-visible { outline-color: var(--signal-deep); }
+.hs { color: var(--seg-text); }
+.hs-pin {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + var(--nav-h));
+  min-height: calc(100svh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  padding-block: 20px;
+}
+.hs-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; }
+.hs-head h2 {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.hs-kicker { color: var(--seg-accent); margin-bottom: 8px; }
+.hs--brand :focus-visible { outline-color: var(--signal-deep); }
+.hs-note { color: var(--seg-muted); text-align: right; }
+.hs-viewport { overflow-x: auto; overflow-y: hidden; height: var(--th); scroll-snap-type: x proximity; }
+.hs-on .hs-viewport { overflow: hidden; scroll-snap-type: none; }
+.hs-track {
+  list-style: none;
+  margin: 0;
+  padding-block: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  height: 100%;
+  will-change: transform;
+}
+.hs-item { flex: none; height: 100%; scroll-snap-align: start; transform-origin: center; }
+.tile-btn {
+  position: relative;
+  display: block;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: var(--seg-tile);
+  overflow: hidden;
+  cursor: zoom-in;
+  color: #fff;
+  font: inherit;
+  text-align: left;
+}
+.tile-btn img { display: block; height: 100%; width: auto; transition: transform 0.5s ease; }
+.tile-cap {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 36px 14px 14px;
+  background: linear-gradient(to top, rgba(8, 10, 9, 0.86), rgba(8, 10, 9, 0));
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.tile-cap b { font-family: var(--f-display); font-weight: 800; font-size: 1.35rem; line-height: 1.05; text-transform: uppercase; letter-spacing: 0.02em; }
+.tile-cap i { font-style: normal; font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; }
+@media (hover: hover) {
+  .tile-btn:hover img { transform: scale(1.03); }
+  .tile-btn:hover .tile-cap, .tile-btn:focus-visible .tile-cap { opacity: 1; transform: none; }
+}
+.hs-bar { height: 2px; background: var(--seg-line); }
+.hs-bar span { display: block; height: 100%; width: 0; background: var(--seg-accent); }
+
+/* Contact */
+.contact { padding-block: clamp(48px, 8vw, 104px) clamp(32px, 5vw, 56px); background: var(--signal-deep); color: #fff; }
+.contact .wrap { display: flex; flex-direction: column; gap: 40px; }
+.contact h2 { font-family: var(--f-display); font-weight: 900; font-size: clamp(2.6rem, 7vw, 5.5rem); line-height: 0.9; text-transform: uppercase; max-width: 14ch; }
+.contact dl { margin: 0; display: grid; grid-template-columns: 1fr; border-top: 1px solid rgba(255, 255, 255, 0.5); }
+.contact dl > div { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px; padding: 16px 0; }
+.contact dl > div::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(255, 255, 255, 0.5); transform-origin: left; }
+.contact dt { opacity: 0.85; }
+.contact dd { margin: 0; font-family: var(--f-mono); font-size: 1rem; overflow-wrap: anywhere; user-select: all; }
+.foot { padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; opacity: 0.85; }
+/* Contact: links + scroll reveal */
+.clink { color: inherit; text-decoration: none; display: inline-flex; align-items: baseline; gap: 8px; background: linear-gradient(currentColor, currentColor) 0 100% / 0% 1px no-repeat; transition: background-size 0.45s cubic-bezier(0.2, 0.85, 0.2, 1); padding-bottom: 2px; }
+.clink b { font-weight: 400; display: inline-block; transition: transform 0.4s cubic-bezier(0.2, 0.85, 0.2, 1); }
+.clink:hover, .clink:focus-visible { background-size: 100% 1px; }
+.clink:hover b, .clink:focus-visible b { transform: translate(3px, -3px); }
+.copy { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: inherit; background: transparent; border: 1px solid rgba(255, 255, 255, 0.55); border-radius: 999px; padding: 3px 12px; margin-left: 10px; cursor: pointer; transition: background 0.25s, color 0.25s; }
+.copy:hover, .copy:focus-visible { background: #fff; color: var(--signal-deep); }
+.contact :focus-visible { outline-color: #fff; }
+.contact h2 .cw { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.04em 0.06em 0.1em; margin: -0.04em -0.06em -0.1em; }
+.contact h2 .cw i { display: inline-block; font-style: normal; transition: transform 1s cubic-bezier(0.2, 0.85, 0.2, 1), opacity 0.8s ease; transition-delay: calc(var(--i) * 0.12s); }
+.contact dl > div > * { transition: transform 0.9s cubic-bezier(0.2, 0.85, 0.2, 1), opacity 0.8s ease; transition-delay: calc(0.45s + var(--r) * 0.15s); }
+.contact dl > div::after { transition: transform 1.1s cubic-bezier(0.2, 0.85, 0.2, 1); transition-delay: calc(0.4s + var(--r) * 0.15s); }
+.contact .foot { transition: opacity 1s ease 1.2s; }
+.contact dl { border-top-color: transparent; position: relative; }
+.contact dl::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(255, 255, 255, 0.5); transform-origin: left; transition: transform 1.1s cubic-bezier(0.2, 0.85, 0.2, 1) 0.3s; }
+.js .contact:not(.in) h2 .cw i { transform: translateY(115%) rotate(5deg); opacity: 0; }
+.js .contact:not(.in) dl > div > * { transform: translateY(26px); opacity: 0; }
+.js .contact:not(.in) dl > div::after, .js .contact:not(.in) dl::before { transform: scaleX(0); }
+.js .contact:not(.in) .foot { opacity: 0; }
+
+@media (min-width: 900px) { .contact dl { max-width: 640px; } }
+
+/* Viewer */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  padding: calc(16px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  background: rgba(8, 10, 9, 0.96);
+  color: var(--text-d);
+}
+.lb[hidden] { display: none; }
+.lb-top, .lb-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.lb-stage { min-height: 0; display: grid; place-items: center; }
+.lb-stage img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 2px; }
+.lb-title { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lb-title b { font-family: var(--f-display); font-weight: 800; font-size: 1.5rem; line-height: 1.05; text-transform: uppercase; }
+.lb-title span { color: var(--muted-d); }
+.lb button {
+  font: inherit;
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-d);
+  background: transparent;
+  border: 1px solid var(--line-d);
+  border-radius: 2px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+.lb button:hover { border-color: var(--text-d); }
+.lb-nav { display: flex; gap: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ring-text, .ring-orbit, .ring, .photo, .photo img, .about-copy > *, .about h1 .w i { animation: none !important; }
+  .photo img { transition: none; }
+  .contact *, .contact *::after, .contact dl::before { transition: none !important; }
+  .js .contact:not(.in) * { opacity: 1 !important; transform: none !important; }
+  .about h1 .accent .w i { background: none; -webkit-text-fill-color: currentColor; color: var(--signal); }
+  .tile-btn img, .tile-cap { transition: none; }
+}
+
+/* Loading screen: 3D smiley */
+html.is-loading { overflow: hidden; }
+html.is-loading body > :not(.loader) *, html.is-loading body > :not(.loader) *::before, html.is-loading body > :not(.loader) *::after { animation-play-state: paused !important; }
+.loader {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; place-items: center;
+  padding: 24px;
+  background: radial-gradient(circle at 50% 40%, rgba(43, 212, 97, 0.2), transparent 55%), var(--ink);
+  color: var(--text-d);
+  transition: transform 0.95s cubic-bezier(0.7, 0, 0.2, 1);
+}
+.loader.out { transform: translateY(-100%); }
+.loader.out .ld-inner { opacity: 0; transform: translateY(-24px) scale(0.96); }
+.ld-inner { display: flex; flex-direction: column; align-items: center; gap: clamp(22px, 5vh, 40px); transition: opacity 0.5s ease, transform 0.7s ease; }
+.sm-pop { animation: sm-pop 1s cubic-bezier(0.2, 1.45, 0.4, 1) both; }
+@keyframes sm-pop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.sm { --s: clamp(150px, 30vmin, 230px); position: relative; width: calc(var(--s) * 1.05); height: var(--s); margin-bottom: calc(var(--s) * 0.16); }
+.sm-float { position: absolute; inset: 0; perspective: calc(var(--s) * 5); animation: sm-float 1.6s ease-in-out infinite alternate; }
+@keyframes sm-float { from { transform: translateY(calc(var(--s) * -0.035)); } to { transform: translateY(calc(var(--s) * 0.035)); } }
+.sm-img { display: block; width: 100%; height: 100%; object-fit: contain; animation: sm-sway 3.2s ease-in-out infinite alternate; filter: drop-shadow(0 calc(var(--s) * 0.05) calc(var(--s) * 0.07) rgba(0, 0, 0, 0.35)); }
+@keyframes sm-sway { from { transform: rotateY(-18deg) rotateX(5deg); } to { transform: rotateY(18deg) rotateX(-4deg); } }
+.sm-gl { position: absolute; left: -12%; top: -12%; width: 124%; height: 124%; display: block; pointer-events: none; }
+.sm-shadow { position: absolute; left: 14%; right: 14%; bottom: calc(var(--s) * -0.15); height: calc(var(--s) * 0.09); border-radius: 50%; background: rgba(0, 0, 0, 0.55); filter: blur(calc(var(--s) * 0.04)); animation: sm-shadow 1.6s ease-in-out infinite alternate; }
+@keyframes sm-shadow { from { transform: scale(1.06); opacity: 0.85; } to { transform: scale(0.84); opacity: 0.5; } }
+.ld-title { margin: 0; text-align: center; font-family: var(--f-display); font-weight: 900; font-size: clamp(2rem, 7vw, 3.8rem); line-height: 0.95; text-transform: uppercase; max-width: 14ch; }
+.ld-title .lw { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.04em 0.06em 0.1em; margin: -0.04em -0.06em -0.1em; }
+.ld-title .lw i { display: inline-block; font-style: normal; animation: ld-rise 0.9s cubic-bezier(0.2, 0.85, 0.2, 1) both; animation-delay: calc(0.35s + var(--i) * 0.12s); }
+.ld-title .acc { color: var(--signal); }
+@keyframes ld-rise { from { transform: translateY(115%) rotate(4deg); opacity: 0; } to { transform: none; opacity: 1; } }
+.ld-meter { width: min(260px, 62vw); display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.ld-bar { width: 100%; height: 2px; background: rgba(238, 241, 234, 0.18); }
+.ld-bar span { display: block; height: 100%; width: 0; background: var(--signal); }
+.ld-pct { color: var(--muted-d); }
+@media (prefers-reduced-motion: reduce) {
+  .sm-pop, .sm-float, .sm-img, .sm-shadow, .ld-title .lw i { animation: none !important; }
+  .loader { transition: opacity 0.4s ease; }
+  .loader.out { transform: none; opacity: 0; }
+}
+</style>
+<noscript><style>.loader{display:none !important}</style></noscript>
+</head>
+<body>
+<div class="loader" id="loader" role="status" aria-live="polite">
+  <div class="ld-inner">
+    <div class="sm-pop"><div class="sm" aria-hidden="true">
+      <div class="sm-shadow"></div>
+      <div class="sm-float"><img class="sm-img" src="img/smiley.png" alt="" width="468" height="445"></div>
+    </div></div>
+    <p class="ld-title"><span class="lw"><i style="--i:0">Welcome</i></span> <span class="lw"><i style="--i:1">to</i></span> <span class="lw"><i style="--i:2">my</i></span> <span class="lw acc"><i style="--i:3">portfolio</i></span></p>
+    <div class="ld-meter"><div class="ld-bar"><span id="ld-fill"></span></div><span class="label ld-pct" id="ld-pct">Loading 0%</span></div>
+  </div>
+</div>
+<script>document.documentElement.classList.add('is-loading');</script>
+
+<div class="bg-sphere" aria-hidden="true"><video id="bgv" src="img/bg-sphere.mp4" poster="img/bg-poster.jpg" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"></video></div>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brandmark" href="#about">Michael Etete</a>
+    <nav class="nav label" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#sport">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="about-copy">
+        <p class="label" style="color: var(--muted-d)">About me</p>
+        <h1 aria-label="Hi, I'm Michael Etete."><span class="w" aria-hidden="true" style="--i:0"><i>Hi,</i></span> <span class="w" aria-hidden="true" style="--i:1"><i>I'm</i></span> <span class="accent" aria-hidden="true"><span class="w" style="--i:2"><i>Michael</i></span> <span class="w" style="--i:3"><i>Etete.</i></span></span></h1>
+        <p class="about-role">Graphic designer, motion designer, video editor based in Lagos.</p>
+        <p class="about-lede">Crafting high-octane visual identities, a designer of every niche!</p>
+        <p class="about-go label"><a href="#sport">See the work ↓</a></p>
+      </div>
+      <div class="ring" aria-label="Photo of the designer">
+        <svg class="ring-text" viewBox="0 0 400 400" aria-hidden="true">
+          <defs><path id="ring-path" d="M200,200 m-172,0 a172,172 0 1,1 344,0 a172,172 0 1,1 -344,0"/></defs>
+          <text><textPath href="#ring-path" textLength="1070" lengthAdjust="spacing">Graphic designer · Motion designer · Video editor · Lagos ·</textPath></text>
+        </svg>
+        <div class="ring-orbit" aria-hidden="true"></div>
+        <div class="photo"><img src="img/me.jpg" alt="Michael Etete" width="720" height="720"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hs hs--sport" id="sport" aria-labelledby="sport-h">
+    <div class="hs-pin">
+      <div class="wrap hs-head">
+        <div><p class="label hs-kicker">01 / 05</p><h2 id="sport-h">Sport Designs</h2></div>
+        <p class="label hs-note">5 posters · scroll to move along</p>
+      </div>
+      <div class="hs-viewport">
+        <ul class="hs-track">
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Spain" data-meta="Sport · FIFA World Cup 2026" aria-label="View Spain poster larger">
+            <img src="img/sport-1.jpg" alt="Spain World Cup poster with three players, a film clapperboard and the trophy, red and navy with large SPAIN lettering" width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Spain</b><i>FIFA World Cup 2026</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Ousame, PSG" data-meta="Sport · Football poster" aria-label="View Ousame PSG poster larger">
+            <img src="img/sport-2.jpg" alt="PSG player sprinting in a pink kit surrounded by glossy translucent pink 3D letters" width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Ousame, PSG</b><i>Football poster</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Ademola Lookman" data-meta="Sport · Nigeria vs Guinea-Bissau" aria-label="View Lookman poster larger">
+            <img src="img/sport-3.jpg" alt="Green Nigeria match poster, a crowned forward in the centre with stadium and flag, Nigeria versus Guinea-Bissau" width="1000" height="1250" loading="lazy">
+            <span class="tile-cap"><b>Ademola Lookman</b><i>Nigeria vs Guinea-Bissau</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Piastri" data-meta="Sport · McLaren personal project" aria-label="View Piastri poster larger">
+            <img src="img/sport-4.jpg" alt="Orange and navy McLaren poster with two helmeted driver portraits, palm leaves and the race car below the name PIASTRI" width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Piastri</b><i>McLaren · Personal project</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Race Result, Monaco" data-meta="Sport · Formula 1 round 6" aria-label="View Race Result Monaco poster larger">
+            <img src="img/sport-5.jpg" alt="Light Formula 1 race result poster for Monaco with a smiling podium winner holding a trophy and a race car at the base" width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Race Result</b><i>Monaco · Formula 1</i></span></button></li>
+        </ul>
+      </div>
+      <div class="wrap"><div class="hs-bar"><span></span></div></div>
+    </div>
+  </section>
+
+  <section class="hs hs--brand" id="brand" aria-labelledby="brand-h">
+    <div class="hs-pin">
+      <div class="wrap hs-head">
+        <div><p class="label hs-kicker">02 / 05</p><h2 id="brand-h">Brand Designs</h2></div>
+        <p class="label hs-note">6 flyers · scroll to move along</p>
+      </div>
+      <div class="hs-viewport">
+        <ul class="hs-track">
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Food is Ready" data-meta="Brand · Stanel Group Jos" aria-label="View Food is Ready flyer larger">
+            <img src="img/brand-2.jpg" alt="Red food promo flyer, a hand lifting a silver cloche over jollof rice with chicken, with order details along the bottom" width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Food is Ready</b><i>Stanel Group Jos</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Building Modern Web Solutions" data-meta="Brand · Adi Standards" aria-label="View Adi Standards flyer larger">
+            <img src="img/brand-1.jpg" alt="Light blue web services flyer with a smiling man holding a laptop, an expertise list and contact bar" width="736" height="919" loading="lazy">
+            <span class="tile-cap"><b>Adi Standards</b><i>Web solutions flyer</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Legacy" data-meta="Brand · Sahaad Empowerment Foundation" aria-label="View Legacy flyer larger">
+            <img src="img/brand-3.jpg" alt="Mother's Day flyer with four generations of women in orange outfits and the word Legacy in red" width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Legacy</b><i>Sahaad Foundation</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Elite Nail Studio" data-meta="Brand · Services flyer" aria-label="View Elite Nail Studio flyer larger">
+            <img src="img/brand-4.jpg" alt="Pink and plum nail studio flyer with a technician at work, a services box and a row of client photos" width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Elite Nail Studio</b><i>Services flyer</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Leesha's Aura" data-meta="Brand · Perfume flyer" aria-label="View Leesha's Aura flyer larger">
+            <img src="img/event-2.jpg" alt="Purple perfume flyer for Leesha's Aura with a smiling woman holding a bottle, surrounded by blue flowers" width="736" height="1041" loading="lazy">
+            <span class="tile-cap"><b>Leesha's Aura</b><i>Perfume brand</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Open. Invest. Own." data-meta="Brand · asset_by_israel" aria-label="View Open Invest Own flyer larger">
+            <img src="img/brand-5.jpg" alt="Real estate flyer with wooden doors opening onto a green field and a blue map pin, Open. Invest. Own." width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Open. Invest. Own.</b><i>asset_by_israel</i></span></button></li>
+        </ul>
+      </div>
+      <div class="wrap"><div class="hs-bar"><span></span></div></div>
+    </div>
+  </section>
+
+  <section class="hs hs--events" id="events" aria-labelledby="events-h">
+    <div class="hs-pin">
+      <div class="wrap hs-head">
+        <div><p class="label hs-kicker">03 / 05</p><h2 id="events-h">Event Designs</h2></div>
+        <p class="label hs-note">7 flyers · scroll to move along</p>
+      </div>
+      <div class="hs-viewport">
+        <ul class="hs-track">
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Y2K Vibes Line-up" data-meta="Event · D-Arena" aria-label="View Y2K Vibes line-up flyer larger">
+            <img src="img/event-1.jpg" alt="Green Y2K Vibes line-up flyer with crumpled paper, boomboxes and a list of DJs and hosts" width="736" height="1041" loading="lazy">
+            <span class="tile-cap"><b>Y2K Vibes Line-up</b><i>D-Arena</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Glow Experience" data-meta="Event · 17th April · D-Arena" aria-label="View Glow Experience flyer larger">
+            <img src="img/event-3.jpg" alt="Hot pink Glow Experience party flyer with a woman in light-up glasses and beads, date, price list and activities" width="736" height="1041" loading="lazy">
+            <span class="tile-cap"><b>Glow Experience</b><i>17th April · D-Arena</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="After Exam: Bon Fire Edition" data-meta="Event · Bon fire" aria-label="View After Exam flyer larger">
+            <img src="img/event-4.jpg" alt="After Exam bon fire flyer with a student in a blue varsity cardigan sitting in front of a brick high school under a big moon" width="736" height="1041" loading="lazy">
+            <span class="tile-cap"><b>After Exam</b><i>Bon Fire Edition</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Denim on Denim" data-meta="Event · 29th May · D-Arena" aria-label="View Denim on Denim flyer larger">
+            <img src="img/event-5.jpg" alt="Blue Denim on Denim flyer with three women in denim outfits in front of denim lockers, with entry prices" width="735" height="1039" loading="lazy">
+            <span class="tile-cap"><b>Denim on Denim</b><i>29th May · D-Arena</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="3 Hours of DJ Virtual" data-meta="Event · 15th May · PXP Grillmates" aria-label="View 3 Hours of DJ Virtual flyer larger">
+            <img src="img/event-6.jpg" alt="Red and black DJ set flyer with a DJ in a varsity jacket, city towers and a vinyl record" width="736" height="1041" loading="lazy">
+            <span class="tile-cap"><b>3 Hours of DJ Virtual</b><i>15th May · PXP Grillmates</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Bon Fire Party" data-meta="Event · 18th July · Semilore Field" aria-label="View Bon Fire Party flyer larger">
+            <img src="img/event-7.jpg" alt="Invitation flyer with a red envelope and letter on a wooden table, flames at the bottom, for a bon fire party" width="736" height="1041" loading="lazy">
+            <span class="tile-cap"><b>Bon Fire Party</b><i>18th July · Semilore Field</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Y2K Vibes" data-meta="Event · 9th May · D-Arena" aria-label="View Y2K Vibes flyer larger">
+            <img src="img/event-8.jpg" alt="Green Y2K Vibes party flyer with a woman in an afro between two clock towers, with date, time and table prices" width="736" height="1041" loading="lazy">
+            <span class="tile-cap"><b>Y2K Vibes</b><i>9th May · D-Arena</i></span></button></li>
+        </ul>
+      </div>
+      <div class="wrap"><div class="hs-bar"><span></span></div></div>
+    </div>
+  </section>
+
+  <section class="hs hs--social" id="social" aria-labelledby="social-h">
+    <div class="hs-pin">
+      <div class="wrap hs-head">
+        <div><p class="label hs-kicker">04 / 05</p><h2 id="social-h">Social Media Designs</h2></div>
+        <p class="label hs-note">6 posts · scroll to move along</p>
+      </div>
+      <div class="hs-viewport">
+        <ul class="hs-track">
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Ring Ring" data-meta="Social media · Larry Graphics" aria-label="View Ring Ring social post larger">
+            <img src="img/social-1.jpg" alt="Mint green social post with a large green rotary telephone and the headline Ring Ring, Your Brand Needs Me" width="736" height="918" loading="lazy">
+            <span class="tile-cap"><b>Ring Ring</b><i>Larry Graphics · Promo</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Creative Agency" data-meta="Social media · Devziner Studio" aria-label="View Creative Agency social post larger">
+            <img src="img/social-2.jpg" alt="Purple agency post with huge white lettering reading Creative Agency and a laptop showing a website on a couch" width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Creative Agency</b><i>Devziner Studio · Agency promo</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Share the Value" data-meta="Social media · NexData referral" aria-label="View NexData referral post larger">
+            <img src="img/social-3.jpg" alt="Red NexData referral post with two excited people looking at a phone and the line Share the Value, Earn the Reward" width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Share the Value</b><i>NexData · Referral</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Split the Bill" data-meta="Social media · PayPulse" aria-label="View PayPulse split the bill post larger">
+            <img src="img/social-4.jpg" alt="Purple PayPulse post with a man in a purple chair looking at his phone and the headline No More Awkward Calculations" width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Split the Bill</b><i>PayPulse · App promo</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Pay, Save, Split" data-meta="Social media · PayPulse" aria-label="View PayPulse pay save split post larger">
+            <img src="img/social-5.jpg" alt="Purple and green PayPulse post with a smiling woman holding a phone and the headline The Smarter Way to Pay, Save, and Split" width="735" height="919" loading="lazy">
+            <span class="tile-cap"><b>Pay, Save, Split</b><i>PayPulse · App promo</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Throwback Thursday" data-meta="Social media · Larry Designs" aria-label="View Throwback Thursday post larger">
+            <img src="img/social-6.jpg" alt="Green Throwback Thursday post with an elderly man in a brown suit sitting next to a vintage Macintosh computer" width="736" height="920" loading="lazy">
+            <span class="tile-cap"><b>Throwback Thursday</b><i>Larry Designs · Engagement</i></span></button></li>
+        </ul>
+      </div>
+      <div class="wrap"><div class="hs-bar"><span></span></div></div>
+    </div>
+  </section>
+
+  <section class="hs hs--church" id="church" aria-labelledby="church-h">
+    <div class="hs-pin">
+      <div class="wrap hs-head">
+        <div><p class="label hs-kicker">05 / 05</p><h2 id="church-h">Church Designs</h2></div>
+        <p class="label hs-note">4 flyers · scroll to move along</p>
+      </div>
+      <div class="hs-viewport">
+        <ul class="hs-track">
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="The Temple of God" data-meta="Church · Eagles Anointed Generation" aria-label="View Temple of God flyer larger">
+            <img src="img/church-1.jpg" alt="Blue and violet event flyer with large lettering reading The Temple of God above glowing temple columns" width="735" height="956" loading="lazy">
+            <span class="tile-cap"><b>The Temple of God</b><i>Eagles Anointed Generation</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Majesty 4.0" data-meta="Church · Raise A Worship" aria-label="View Majesty 4.0 flyer larger">
+            <img src="img/church-2.jpg" alt="Blue sky flyer with gold lettering reading Majesty, a golden throne on a globe and waterfalls on both sides" width="736" height="1041" loading="lazy">
+            <span class="tile-cap"><b>Majesty 4.0</b><i>Raise A Worship · RAW 4.0</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="Majesty 5.0" data-meta="Church · Raise A Worship" aria-label="View Majesty 5.0 flyer larger">
+            <img src="img/church-3.jpg" alt="Dark dramatic worship night flyer with a woman in worship, Roman columns, flames and coming soon banners" width="736" height="1041" loading="lazy">
+            <span class="tile-cap"><b>Majesty 5.0</b><i>Raise A Worship · RAW 5.0</i></span></button></li>
+          <li class="hs-item"><button class="tile-btn" type="button" data-title="The Father's House" data-meta="Church · TACN Ogba Youths talkshow" aria-label="View The Father's House flyer larger">
+            <img src="img/church-4.jpg" alt="Grey and red talkshow flyer with big lettering The Father's House, a microphone and five people seated around a robed figure" width="736" height="1041" loading="lazy">
+            <span class="tile-cap"><b>The Father's House</b><i>TACN Ogba Youths · Talkshow</i></span></button></li>
+        </ul>
+      </div>
+      <div class="wrap"><div class="hs-bar"><span></span></div></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2 aria-label="Need a design made?"><span class="cw" aria-hidden="true" style="--i:0"><i>Need</i></span> <span class="cw" aria-hidden="true" style="--i:1"><i>a</i></span> <span class="cw" aria-hidden="true" style="--i:2"><i>design</i></span> <span class="cw" aria-hidden="true" style="--i:3"><i>made?</i></span></h2>
+      <dl>
+        <div style="--r:0"><dt class="label">Email</dt><dd><a class="clink" href="mailto:kelly700imoh@gmail.com" target="_blank" rel="noopener">kelly700imoh@gmail.com <b aria-hidden="true">↗</b></a> <button type="button" class="copy" data-copy="kelly700imoh@gmail.com">Copy</button></dd></div>
+        <div style="--r:1"><dt class="label">WhatsApp</dt><dd><a class="clink" href="https://wa.me/2347043527857" target="_blank" rel="noopener">+234 704 352 7857 <b aria-hidden="true">↗</b></a></dd></div>
+        <div style="--r:2"><dt class="label">LinkedIn</dt><dd><a class="clink" href="https://www.linkedin.com/search/results/people/?keywords=Michael%20Etete" target="_blank" rel="noopener">Michael Etete <b aria-hidden="true">↗</b></a></dd></div>
+      </dl>
+      <div class="foot label"><span>Michael Etete</span><span>© 2026</span></div>
+    </div>
+  </section>
+</main>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Design viewer">
+  <div class="lb-top">
+    <div class="lb-title"><b id="lb-title"></b><span id="lb-meta" class="label"></span></div>
+    <button type="button" id="lb-close">Close</button>
+  </div>
+  <div class="lb-stage"><img id="lb-img" alt=""></div>
+  <div class="lb-bottom">
+    <span id="lb-count" class="label" style="color: var(--muted-d)"></span>
+    <div class="lb-nav">
+      <button type="button" id="lb-prev" aria-label="Previous design">Prev</button>
+      <button type="button" id="lb-next" aria-label="Next design">Next</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var loader = document.getElementById('loader');
+  if (!loader) return;
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fill = document.getElementById('ld-fill'), pct = document.getElementById('ld-pct');
+  var t0 = performance.now(), MIN = reduce ? 900 : 3000, MAX = 8000;
+  var ready = document.readyState === 'complete', done = false;
+  window.addEventListener('load', function () { ready = true; });
+  function finish() {
+    if (done) return; done = true;
+    fill.style.width = '100%'; pct.textContent = 'Loading 100%';
+    loader.classList.add('out');
+    root.classList.remove('is-loading');
+    window.dispatchEvent(new Event('resize'));
+    setTimeout(function () { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 1100);
+  }
+  function tick(now) {
+    if (done) return;
+    var e = now - t0, p = Math.min(1, e / MIN);
+    p = 1 - Math.pow(1 - p, 2.2);
+    if (!ready) p = Math.min(p, 0.92);
+    fill.style.width = (p * 100).toFixed(1) + '%';
+    pct.textContent = 'Loading ' + Math.round(p * 100) + '%';
+    if ((ready && e >= MIN) || e >= MAX) { finish(); return; }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  setTimeout(finish, MAX + 500);
+})();
+</script>
+<script>
+/* 3D sunglasses smiley (three.js). Falls back to the flat image if WebGL or the library is unavailable. */
+(function () {
+  var holder = document.querySelector('.sm-float');
+  var fallback = holder && holder.querySelector('.sm-img');
+  if (!holder) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var URL3 = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  function load(cb) {
+    if (window.THREE) return cb();
+    var s = document.createElement('script');
+    s.src = URL3; s.onload = cb; s.onerror = function () {};
+    document.head.appendChild(s);
+  }
+  load(function () {
+    var canvas = null;
+    try { init(); } catch (err) {
+      if (window.console) console.warn('3D smiley unavailable, using image', err);
+      if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
+      if (fallback) fallback.style.display = '';
+    }
+    function init() {
+      var T = window.THREE;
+      canvas = document.createElement('canvas');
+      canvas.className = 'sm-gl';
+      holder.appendChild(canvas);
+      var renderer = new T.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setClearColor(0x000000, 0);
+      var scene = new T.Scene();
+      var camera = new T.PerspectiveCamera(30, 1, 0.1, 50);
+      camera.position.set(0, 0.02, 4.9);
+      function size() {
+        var w = canvas.clientWidth || 300, hh = canvas.clientHeight || 300;
+        renderer.setSize(w, hh, false);
+        camera.aspect = w / hh; camera.updateProjectionMatrix();
+      }
+      size(); window.addEventListener('resize', size);
+
+      /* lights */
+      scene.add(new T.AmbientLight(0xffffff, 0.55));
+      var key = new T.DirectionalLight(0xffffff, 0.95); key.position.set(2.5, 3, 4); scene.add(key);
+      var fill = new T.DirectionalLight(0xffd9a0, 0.35); fill.position.set(-3, -1, 2); scene.add(fill);
+      var rim = new T.DirectionalLight(0xffffff, 0.5); rim.position.set(-2, 2, -3); scene.add(rim);
+      var spec = new T.PointLight(0xffffff, 0.9, 12); spec.position.set(-2, 2.6, 3.2); scene.add(spec);
+
+      var face = new T.Group(); scene.add(face);
+
+      /* head: glossy yellow sphere with a warm vertical gradient */
+      var hg = new T.SphereGeometry(1, 64, 64);
+      var pos = hg.attributes.position, cols = new Float32Array(pos.count * 3);
+      var top = new T.Color(0xffe23d), bot = new T.Color(0xf2a000), tmp = new T.Color();
+      for (var i = 0; i < pos.count; i++) {
+        var t = (pos.getY(i) + 1) / 2;
+        tmp.copy(bot).lerp(top, Math.pow(t, 0.8));
+        cols[i * 3] = tmp.r; cols[i * 3 + 1] = tmp.g; cols[i * 3 + 2] = tmp.b;
+      }
+      hg.setAttribute('color', new T.BufferAttribute(cols, 3));
+      var head = new T.Mesh(hg, new T.MeshPhysicalMaterial({ vertexColors: true, roughness: 0.32, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.1 }));
+      face.add(head);
+
+      /* mouth: painted on a canvas, then wrapped onto the sphere surface */
+      var CW = 1024, CH = 594, mc = document.createElement('canvas'); mc.width = CW; mc.height = CH;
+      var c = mc.getContext('2d');
+      function P(x, y) { return [(x + 0.62) / 1.24 * CW, (-y) / 0.72 * CH]; }
+      function mouth() {
+        var a = P(-0.52, -0.14), b = P(0.52, -0.14), q = P(0, -0.30), c1 = P(0.44, -0.60), c2 = P(-0.44, -0.60);
+        c.beginPath(); c.moveTo(a[0], a[1]); c.quadraticCurveTo(q[0], q[1], b[0], b[1]);
+        c.bezierCurveTo(c1[0], c1[1], c2[0], c2[1], a[0], a[1]); c.closePath();
+      }
+      c.save(); c.shadowColor = 'rgba(110,45,0,0.6)'; c.shadowBlur = 26; c.fillStyle = '#4a0a07'; mouth(); c.fill(); c.restore();
+      var mg = c.createLinearGradient(0, P(0, -0.2)[1], 0, P(0, -0.5)[1]);
+      mg.addColorStop(0, '#260403'); mg.addColorStop(1, '#8f1c14');
+      c.fillStyle = mg; mouth(); c.fill();
+      c.save(); mouth(); c.clip();
+      var tp = P(0, -0.45), tg = c.createRadialGradient(tp[0], tp[1], 4, tp[0], tp[1], 140);
+      tg.addColorStop(0, '#ff7a6e'); tg.addColorStop(1, '#c4372f');
+      c.fillStyle = tg; c.beginPath(); c.ellipse(tp[0], tp[1], 0.26 / 1.24 * CW, 0.09 / 0.72 * CH, 0, 0, Math.PI * 2); c.fill();
+      var t1 = P(-0.56, -0.10), t2 = P(0, -0.26), t3 = P(0.56, -0.10), t4 = P(0.56, -0.30), t5 = P(0, -0.46), t6 = P(-0.56, -0.30);
+      var tg2 = c.createLinearGradient(0, P(0, -0.15)[1], 0, P(0, -0.38)[1]);
+      tg2.addColorStop(0, '#ffffff'); tg2.addColorStop(1, '#dad4cf');
+      c.fillStyle = tg2; c.beginPath(); c.moveTo(t1[0], t1[1]); c.quadraticCurveTo(t2[0], t2[1], t3[0], t3[1]);
+      c.lineTo(t4[0], t4[1]); c.quadraticCurveTo(t5[0], t5[1], t6[0], t6[1]); c.closePath(); c.fill();
+      var d1 = P(0, -0.2), d2 = P(0, -0.37);
+      c.strokeStyle = 'rgba(120,100,90,0.55)'; c.lineWidth = 3; c.beginPath(); c.moveTo(d1[0], d1[1]); c.lineTo(d2[0], d2[1]); c.stroke();
+      c.restore();
+      c.strokeStyle = 'rgba(190,95,0,0.55)'; c.lineWidth = 5; mouth(); c.stroke();
+      var mtex = new T.CanvasTexture(mc); mtex.anisotropy = 4;
+      var mgeo = new T.PlaneGeometry(1.24, 0.72, 48, 28), mp = mgeo.attributes.position;
+      for (var j = 0; j < mp.count; j++) {
+        var x = mp.getX(j), y = mp.getY(j) - 0.36;
+        var z = Math.sqrt(Math.max(0, 1 - x * x - y * y)) * 1.004;
+        mp.setXYZ(j, x, y, z);
+      }
+      mgeo.computeVertexNormals();
+      face.add(new T.Mesh(mgeo, new T.MeshStandardMaterial({ map: mtex, transparent: true, roughness: 0.3, metalness: 0, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 })));
+
+      /* sunglasses */
+      function rr(w, hh, rt, rb) {
+        var s = new T.Shape(), x = -w / 2, y = -hh / 2;
+        s.moveTo(x + rb, y); s.lineTo(x + w - rb, y); s.quadraticCurveTo(x + w, y, x + w, y + rb);
+        s.lineTo(x + w, y + hh - rt); s.quadraticCurveTo(x + w, y + hh, x + w - rt, y + hh);
+        s.lineTo(x + rt, y + hh); s.quadraticCurveTo(x, y + hh, x, y + hh - rt);
+        s.lineTo(x, y + rb); s.quadraticCurveTo(x, y, x + rb, y);
+        return s;
+      }
+      var frameMat = new T.MeshPhysicalMaterial({ color: 0x0b0b0b, roughness: 0.25, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.1 });
+      var lensMat = new T.MeshPhysicalMaterial({ vertexColors: true, roughness: 0.06, metalness: 0.15, clearcoat: 1, clearcoatRoughness: 0.03 });
+      var hiMat = new T.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5, depthWrite: false });
+      var lw = 0.70, lh = 0.58;
+      var lensTop = new T.Color(0x1a0a04), lensBot = new T.Color(0x9a5316);
+      [-1, 1].forEach(function (sx) {
+        var lg = new T.Group();
+        var outer = rr(lw + 0.14, lh + 0.14, 0.2, 0.26);
+        outer.holes.push(new T.Path(rr(lw, lh, 0.16, 0.22).getPoints(20)));
+        lg.add(new T.Mesh(new T.ExtrudeGeometry(outer, { depth: 0.07, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 3, curveSegments: 20 }), frameMat));
+        var lgeo = new T.ExtrudeGeometry(rr(lw + 0.01, lh + 0.01, 0.16, 0.22), { depth: 0.02, bevelEnabled: false, curveSegments: 20 });
+        var lp = lgeo.attributes.position, lc = new Float32Array(lp.count * 3);
+        for (var k = 0; k < lp.count; k++) {
+          var tt = Math.min(1, Math.max(0, (lp.getY(k) + lh / 2) / lh));
+          tmp.copy(lensBot).lerp(lensTop, Math.pow(tt, 0.7));
+          lc[k * 3] = tmp.r; lc[k * 3 + 1] = tmp.g; lc[k * 3 + 2] = tmp.b;
+        }
+        lgeo.setAttribute('color', new T.BufferAttribute(lc, 3));
+        var lens = new T.Mesh(lgeo, lensMat); lens.position.z = 0.03; lg.add(lens);
+        var s1 = new T.Shape(); s1.moveTo(-0.3, 0.24); s1.lineTo(-0.14, 0.24); s1.lineTo(-0.31, -0.1); s1.closePath();
+        var h1 = new T.Mesh(new T.ShapeGeometry(s1), hiMat); h1.position.z = 0.056; lg.add(h1);
+        var s2 = new T.Shape(); s2.moveTo(0.18, 0.22); s2.lineTo(0.25, 0.22); s2.lineTo(0.12, -0.14); s2.lineTo(0.07, -0.14); s2.closePath();
+        var h2 = new T.Mesh(new T.ShapeGeometry(s2), hiMat); h2.position.z = 0.056; h2.material = hiMat; lg.add(h2);
+        var p = new T.Vector3(sx * 0.43, 0.28, 0); p.z = Math.sqrt(1 - p.x * p.x - p.y * p.y); p.multiplyScalar(1.015);
+        lg.position.copy(p); lg.lookAt(p.clone().multiplyScalar(3));
+        face.add(lg);
+        /* arm: follows the head round to the back */
+        var pts = [];
+        for (var a = 52; a <= 104; a += 13) {
+          var r = Math.sqrt(1.04 * 1.04 - 0.2 * 0.2), ra = a * Math.PI / 180;
+          pts.push(new T.Vector3(sx * Math.sin(ra) * r, 0.2, Math.cos(ra) * r));
+        }
+        face.add(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts), 24, 0.045, 10, false), frameMat));
+      });
+      face.add(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3([new T.Vector3(-0.12, 0.4, 0.985), new T.Vector3(0, 0.43, 1.0), new T.Vector3(0.12, 0.4, 0.985)]), 12, 0.04, 8, false), frameMat));
+
+      /* animate */
+      var t0 = performance.now(), shown = false, rafId = 0;
+      function draw(now) {
+        var t = (now - t0) / 1000;
+        face.rotation.y = reduce ? 0.3 : Math.sin(t * 1.25) * 0.5;
+        face.rotation.x = reduce ? -0.02 : Math.sin(t * 0.95 + 1) * 0.1 - 0.02;
+        face.position.y = reduce ? 0 : Math.sin(t * 2.4) * 0.04;
+        renderer.render(scene, camera);
+        if (!shown) { shown = true; if (fallback) fallback.style.display = 'none'; }
+      }
+      function frame(now) {
+        if (!document.getElementById('loader')) {
+          window.removeEventListener('resize', size);
+          renderer.dispose(); hg.dispose(); mgeo.dispose(); mtex.dispose();
+          return;
+        }
+        draw(now);
+        if (!reduce) rafId = requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+  });
+})();
+</script>
+<script>
+(function () {
+  /* Pinned horizontal scroll: each segment stays on screen while page scrolling pans its strip left to right */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var segs = Array.prototype.slice.call(document.querySelectorAll('.hs')).map(function (el) {
+    return {
+      el: el,
+      pin: el.querySelector('.hs-pin'),
+      vp: el.querySelector('.hs-viewport'),
+      track: el.querySelector('.hs-track'),
+      bar: el.querySelector('.hs-bar span'),
+      items: Array.prototype.slice.call(el.querySelectorAll('.hs-item')),
+      over: 0,
+      top: 0
+    };
+  });
+  var queued = false;
+
+  function layout() {
+    segs.forEach(function (s) {
+      s.el.classList.add('hs-on');
+      s.over = Math.max(0, s.track.scrollWidth - s.vp.clientWidth);
+      s.top = parseFloat(getComputedStyle(s.pin).top) || 0;
+      s.el.style.height = (s.pin.offsetHeight + s.over) + 'px';
+    });
+    update();
+  }
+  function update() {
+    queued = false;
+    var vw = window.innerWidth, vh = window.innerHeight;
+    segs.forEach(function (s) {
+      var r = s.el.getBoundingClientRect();
+      if (r.bottom < -50 || r.top > vh + 50) return;
+      var p = s.over > 0 ? Math.min(1, Math.max(0, (s.top - r.top) / s.over)) : 0;
+      s.track.style.transform = 'translate3d(' + (-p * s.over).toFixed(1) + 'px,0,0)';
+      if (s.bar) s.bar.style.width = (p * 100).toFixed(1) + '%';
+      s.items.forEach(function (it) {
+        var b = it.getBoundingClientRect();
+        var d = Math.min(1, Math.abs(b.left + b.width / 2 - vw / 2) / (vw / 2));
+        it.style.transform = 'scale(' + (1 - d * 0.07).toFixed(3) + ')';
+      });
+    });
+  }
+  function queue() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+
+  if (!reduce) {
+    layout();
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', layout);
+    window.addEventListener('load', layout);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+  }
+
+
+  /* About photo: gentle pointer parallax (fine pointers only) */
+  (function () {
+    var ring = document.querySelector('.ring');
+    if (!ring || reduce || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var about = document.querySelector('.about');
+    about.addEventListener('mousemove', function (e) {
+      var r = about.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      ring.style.setProperty('--tx', (x * -18).toFixed(1) + 'px');
+      ring.style.setProperty('--ty', (y * -18).toFixed(1) + 'px');
+    });
+    about.addEventListener('mouseleave', function () {
+      ring.style.setProperty('--tx', '0px');
+      ring.style.setProperty('--ty', '0px');
+    });
+  })();
+
+  /* Contact: reveal when scrolled into view */
+  (function () {
+    var c = document.querySelector('.contact');
+    if (!c) return;
+    document.documentElement.classList.add('js');
+    if (reduce || !('IntersectionObserver' in window)) { c.classList.add('in'); return; }
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (x) { if (x.isIntersecting) { c.classList.add('in'); io.disconnect(); } });
+    }, { threshold: 0.3 });
+    io.observe(c);
+  })();
+
+  /* Copy email (fallback when mail links are blocked, e.g. inside previews) */
+  (function () {
+    var b = document.querySelector('.copy');
+    if (!b) return;
+    b.addEventListener('click', function () {
+      var t = b.getAttribute('data-copy'), done = function () {
+        b.textContent = 'Copied ✓';
+        setTimeout(function () { b.textContent = 'Copy'; }, 1800);
+      };
+      function legacy() {
+        var a = document.createElement('textarea');
+        a.value = t; a.style.position = 'fixed'; a.style.opacity = '0';
+        document.body.appendChild(a); a.select();
+        try { document.execCommand('copy'); done(); } catch (e) { b.textContent = t; }
+        document.body.removeChild(a);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(t).then(done, legacy);
+      } else { legacy(); }
+    });
+  })();
+
+  /* Background video: pause when off-screen or when reduced motion is on */
+  (function () {
+    var v = document.getElementById('bgv');
+    if (!v) return;
+    if (reduce) { v.removeAttribute('autoplay'); v.pause(); return; }
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+    if (!('IntersectionObserver' in window)) return;
+    var live = {};
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (x) { live[x.target.id] = x.isIntersecting; });
+      if (live.about || live.sport) { var q = v.play(); if (q && q.catch) q.catch(function () {}); }
+      else v.pause();
+    }, { threshold: 0 });
+    ['about', 'sport'].forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+  })();
+
+  /* Viewer */
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile-btn'));
+  var lb = document.getElementById('lb');
+  var img = document.getElementById('lb-img');
+  var title = document.getElementById('lb-title');
+  var meta = document.getElementById('lb-meta');
+  var count = document.getElementById('lb-count');
+  var closeBtn = document.getElementById('lb-close');
+  var cur = -1;
+  var opener = null;
+
+  function show(i) {
+    var t = tiles[i];
+    var src = t.querySelector('img');
+    cur = i;
+    img.src = src.getAttribute('src');
+    img.alt = src.getAttribute('alt');
+    title.textContent = t.dataset.title;
+    meta.textContent = t.dataset.meta;
+    count.textContent = (i + 1) + ' / ' + tiles.length;
+  }
+  function open(i) {
+    opener = tiles[i];
+    show(i);
+    lb.hidden = false;
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function close() {
+    lb.hidden = true;
+    document.body.style.overflow = '';
+    if (opener) opener.focus({ preventScroll: true });
+  }
+  function step(d) { show((cur + d + tiles.length) % tiles.length); }
+
+  tiles.forEach(function (t, i) { t.addEventListener('click', function () { open(i); }); });
+  closeBtn.addEventListener('click', close);
+  document.getElementById('lb-prev').addEventListener('click', function () { step(-1); });
+  document.getElementById('lb-next').addEventListener('click', function () { step(1); });
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('lb-stage')) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+})();
+</script>
+</body>
+</html>
